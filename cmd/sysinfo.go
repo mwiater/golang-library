@@ -18,7 +18,7 @@ package cmd
 import (
 	"fmt"
 	"encoding/json"
-	
+
 	"github.com/elastic/go-sysinfo"
 	"github.com/spf13/cobra"
 )
@@ -26,13 +26,8 @@ import (
 // sysinfoCmd represents the sysinfo command
 var sysinfoCmd = &cobra.Command{
 	Use:   "sysinfo",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "Get infoprmation about your host.",
+	Long: `Get infoprmation about your host.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("Running: sysinfo")
 

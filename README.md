@@ -154,3 +154,8 @@ Rebuild: `go install github.com/mwiater/golang-library`
 
 Run: `golang-library bubblesort`
 
+cobra add pi
+
+go install github.com/mwiater/golang-library
+
+golang-library pi

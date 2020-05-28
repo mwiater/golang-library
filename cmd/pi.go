@@ -22,20 +22,17 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var n int64
+
 // piCmd represents the pi command
 var piCmd = &cobra.Command{
 	Use:   "pi",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "Calculate n-digits of Pi",
+	Long: `Calculate n-digits of Pi`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("Running: pi")
 
-		numberofDigits := int64(10000)
+		numberofDigits := int64(n)
 		result := Pi(numberofDigits)
 
 		fmt.Println("Calculated", numberofDigits, "digits of Pi:", result)
@@ -49,11 +46,11 @@ func init() {
 
 	// Cobra supports Persistent Flags which will work for this command
 	// and all subcommands, e.g.:
-	// piCmd.PersistentFlags().String("foo", "", "A help for foo")
+	//piCmd.PersistentFlags().String("number", "n", "Number of digits to calcluate. The default is: 10000")
 
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
-	// piCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	piCmd.Flags().Int64Var(&n, "number", 10000, "Number of digits to calcluate")
 }
 
 
