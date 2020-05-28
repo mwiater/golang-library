@@ -37,11 +37,12 @@ REF: https://ordina-jworks.github.io/development/2018/10/20/make-your-own-cli-wi
 
 by default, this should store the app in: `~/go`, e.g.: `/home/matt/go/bin/cobra`
 
-Find it via:
+Set the go path, assuming above:
 
-`sudo find / -name cobra -print`
-
-Cobra has changed, not requiring gopath any more? Just going to call cobra directly until I understand this better...
+```
+export GOPATH="/home/matt/go"
+export PATH=$PATH:$(go env GOPATH)/bin
+```
 
 Init:
 
@@ -50,7 +51,7 @@ Assuming in base of repo, e.g.: `/home/matt/projects/golang-library/`
 ```
 mkdir -p github.com/mwiater/golang-library
 cd github.com/mwiater/golang-library
-/home/matt/go/bin/cobra init --pkg-name=github.com/mwiater/golang-library
+cobra init --pkg-name=github.com/mwiater/golang-library
 ```
 
 #=>
@@ -74,7 +75,6 @@ drwxr-x--x 2 matt matt  4096 May 28 18:15 cmd/
 `go mod init github.com/mwiater/golang-library`
 
 This creates the necessary go.mod file needed in the repo, but not in the cobra docs for some reason.
-
 
 ## Commit and push:
 
@@ -116,5 +116,41 @@ This application is a tool to generate the needed files
 to quickly create a Cobra application.
 ```
 
-Add a CMD:
+Modify the `root.go` file to print a message for testing:
+
+Find:
+
+```
+  // Uncomment the following line if your bare application
+  // has an action associated with it:
+  //Run: func(cmd *cobra.Command, args []string) { },
+```
+
+Replace:
+
+```
+  // Uncomment the following line if your bare application
+  // has an action associated with it:
+  Run: func(cmd *cobra.Command, args []string) {fmt.Println("Hello CLI")},
+```
+
+Install app as CLI executable (Use full app path):
+
+`go install github.com/mwiater/golang-library`
+
+Should install here by default: `~/go/bin/golang-library`.
+
+Since GOPATH has been added to PATH (at the beginning of this doc), the CLI command should now be available:
+
+`golang-library` #=>
+
+`Hello CLI`
+
+Add commands:
+
+cobra add bubblesort
+
+Rebuild: `go install github.com/mwiater/golang-library`
+
+Run: `golang-library bubblesort`
 
