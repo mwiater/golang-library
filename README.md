@@ -44,6 +44,21 @@ export GOPATH="/home/matt/go"
 export PATH=$PATH:$(go env GOPATH)/bin
 ```
 
+Permanent:
+
+`nano ~/.bashrc`
+
+Add:
+
+```
+export GOPATH="/home/matt/go"
+export PATH=$PATH:$(go env GOPATH)/bin
+```
+
+Initialize:
+
+`source ~/.bashrc`
+
 Init:
 
 Assuming in base of repo, e.g.: `/home/matt/projects/golang-library/`
@@ -159,3 +174,34 @@ cobra add pi
 go install github.com/mwiater/golang-library
 
 golang-library pi
+
+# List Commands
+
+`golang-library help` #=>
+
+```
+A longer description that spans multiple lines and likely contains
+examples and usage of using your application. For example:
+
+Cobra is a CLI library for Go that empowers applications.
+This application is a tool to generate the needed files
+to quickly create a Cobra application.
+
+Usage:
+  golang-library [flags]
+  golang-library [command]
+
+Available Commands:
+  bubblesort  A bubblesort example.
+  help        Help about any command
+  pi          Calculate n-digits of Pi
+  sysinfo     Get information about your host.
+
+Flags:
+      --config string   config file (default is $HOME/.golang-library.yaml)
+  -h, --help            help for golang-library
+  -t, --toggle          Help message for toggle
+```
+
+## Parallel: Monte Carlo (REF: https://www.soroushjp.com/2015/02/07/go-concurrency-is-not-parallelism-real-world-lessons-with-monte-carlo-simulations/amp/)
+

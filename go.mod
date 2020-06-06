@@ -8,4 +8,5 @@ require (
 	github.com/pkg/errors v0.8.1
 	github.com/spf13/cobra v1.0.0
 	github.com/spf13/viper v1.7.0
+	gopkg.in/gookit/color.v1 v1.1.6
 )
