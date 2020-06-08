@@ -161,7 +161,7 @@ Since GOPATH has been added to PATH (at the beginning of this doc), the CLI comm
 
 `Hello CLI`
 
-Add commands:
+## Adding commands:
 
 cobra add bubblesort
 
@@ -205,3 +205,10 @@ Flags:
 
 ## Parallel: Monte Carlo (REF: https://www.soroushjp.com/2015/02/07/go-concurrency-is-not-parallelism-real-world-lessons-with-monte-carlo-simulations/amp/)
 
+## Logging (REF: https://github.com/sirupsen/logrus)
+
+cobra add logger
+
+Rebuild: `go install github.com/mwiater/golang-library`
+
+Run: `golang-library logger`

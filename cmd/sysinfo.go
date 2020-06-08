@@ -16,59 +16,59 @@ limitations under the License.
 package cmd
 
 import (
-	"fmt"
-	"encoding/json"
+  "fmt"
+  "encoding/json"
 
-	"github.com/elastic/go-sysinfo"
-	"github.com/spf13/cobra"
+  "github.com/elastic/go-sysinfo"
+  "github.com/spf13/cobra"
 )
 
 // sysinfoCmd represents the sysinfo command
 var sysinfoCmd = &cobra.Command{
-	Use:   "sysinfo",
-	Short: "Get infoprmation about your host.",
-	Long: `Get infoprmation about your host.`,
-	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("Running: sysinfo")
+  Use:   "sysinfo",
+  Short: "Get infoprmation about your host.",
+  Long: `Get infoprmation about your host.`,
+  Run: func(cmd *cobra.Command, args []string) {
+    fmt.Println("Running: sysinfo")
 
-		// See: https://github.com/elastic/go-sysinfo/blob/master/system_test.go
-		host, err := sysinfo.Host()
-		if err != nil {
-			fmt.Println("ERROR:", err)
-		}
+    // See: https://github.com/elastic/go-sysinfo/blob/master/system_test.go
+    host, err := sysinfo.Host()
+    if err != nil {
+      fmt.Println("ERROR:", err)
+    }
 
-		info := host.Info()
+    info := host.Info()
 
-		memory, err := host.Memory()
-		if err != nil {
-			fmt.Println("ERROR:", err)
-		}
+    memory, err := host.Memory()
+    if err != nil {
+      fmt.Println("ERROR:", err)
+    }
 
-		cpu, err := host.CPUTime()
-		if err != nil {
-			fmt.Println("ERROR:", err)
-		}
-		
-		infoJSON, _ := json.MarshalIndent(info, "", "  ")
-		memoryJSON, _ := json.MarshalIndent(cpu, "", "  ")
-		cpuJSON, _ := json.MarshalIndent(memory, "", "  ")
+    cpu, err := host.CPUTime()
+    if err != nil {
+      fmt.Println("ERROR:", err)
+    }
+    
+    infoJSON, _   := json.MarshalIndent(info, "", "  ")
+    memoryJSON, _ := json.MarshalIndent(cpu, "", "  ")
+    cpuJSON, _    := json.MarshalIndent(memory, "", "  ")
 
-		fmt.Println("Info:", string(infoJSON), "\n")
-		fmt.Println("Memory Info:", string(memoryJSON), "\n")
-		fmt.Println("CPU Info:", string(cpuJSON), "\n")
-	},
+    fmt.Println("Info:", string(infoJSON), "\n")
+    fmt.Println("Memory Info:", string(memoryJSON), "\n")
+    fmt.Println("CPU Info:", string(cpuJSON), "\n")
+  },
 }
 
 func init() {
-	rootCmd.AddCommand(sysinfoCmd)
+  rootCmd.AddCommand(sysinfoCmd)
 
-	// Here you will define your flags and configuration settings.
+  // Here you will define your flags and configuration settings.
 
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// sysinfoCmd.PersistentFlags().String("foo", "", "A help for foo")
+  // Cobra supports Persistent Flags which will work for this command
+  // and all subcommands, e.g.:
+  // sysinfoCmd.PersistentFlags().String("foo", "", "A help for foo")
 
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// sysinfoCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+  // Cobra supports local flags which will only run when this command
+  // is called directly, e.g.:
+  // sysinfoCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
