@@ -16,12 +16,40 @@ limitations under the License.
 package cmd
 
 import (
-	"fmt"
 	"math/big"
+	"strconv"
+	"os"
+	"fmt"
+	"time"
 
 	"github.com/spf13/cobra"
+	"github.com/TwiN/go-color"
 )
 
+
+type methodTimer interface {
+	start() int64
+	stop() int64
+}
+
+type timer struct {
+	startTime int64
+	stopTime int64
+	elapsedTime int64
+}
+
+func (t timer) start() timer {
+	t.startTime = time.Now().UnixMilli()
+
+	return t
+}
+
+func (t timer) stop() timer {
+	t.stopTime = time.Now().UnixMilli()
+	t.elapsedTime = t.stopTime - t.startTime
+
+	return t
+}
 var n int64
 
 // piCmd represents the pi command
@@ -30,12 +58,28 @@ var piCmd = &cobra.Command{
 	Short: "Calculate n-digits of Pi",
 	Long: `Calculate n-digits of Pi`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("Running: pi")
+		t := timer{startTime: 0, stopTime: 0, elapsedTime: 0}
+		t = t.start()
 
-		numberofDigits := int64(n)
+		println(color.Bold + "Running: " + color.Green + "piCmd()" + color.Reset)
+
+		intVar, err := strconv.Atoi(args[0])
+		if err != nil {
+			fmt.Println("[ERROR]", err)
+			os.Exit(1)
+		}
+		
+		numberofDigits := int64(intVar)
 		result := Pi(numberofDigits)
 
-		fmt.Println("Calculated", numberofDigits, "digits of Pi:", result)
+		t = t.stop()
+
+		println(color.Bold + "  Calculated: " + color.Green + strconv.FormatInt(numberofDigits, 10) + " digits" + color.Reset)
+		println(color.Bold + "  Elapsed: " + color.Green + strconv.FormatInt(t.elapsedTime, 10) + "ms" + color.Reset)
+
+		if(1 == 2){
+			fmt.Println(result)
+		}
 	},
 }
 
@@ -50,7 +94,7 @@ func init() {
 
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
-	piCmd.Flags().Int64Var(&n, "number", 10000, "Number of digits to calcluate")
+	piCmd.Flags().Int64Var(&n, "number", 100000, "Number of digits to calcluate")
 }
 
 

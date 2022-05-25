@@ -35,6 +35,21 @@ REF: https://ordina-jworks.github.io/development/2018/10/20/make-your-own-cli-wi
 
 `go get github.com/spf13/cobra/cobra`
 
+Issue: https://github.com/spf13/cobra/issues/1215
+
+```
+go get github.com/spf13/cobra/cobra
+go: extracting github.com/spf13/cobra v1.0.0
+go: finding github.com/spf13/cobra/cobra latest
+go: extracting github.com/spf13/cobra/cobra v0.0.0-20200916152758-7f8e83d9366a
+go get github.com/spf13/cobra/cobra: ambiguous import: found github.com/spf13/cobra/cobra in multiple modules:
+        github.com/spf13/cobra v1.0.0 (/home/matt/go/pkg/mod/github.com/spf13/cobra@v1.0.0/cobra)
+        github.com/spf13/cobra/cobra v0.0.0-20200916152758-7f8e83d9366a (/home/matt/go/pkg/mod/github.com/spf13/cobra/cobra@v0.0.0-20200916152758-7f8e83d9366a)
+
+```
+
+`go get -u github.com/spf13/cobra/cobra@v1.0.0`
+
 by default, this should store the app in: `~/go`, e.g.: `/home/matt/go/bin/cobra`
 
 Set the go path, assuming above:
@@ -163,7 +178,11 @@ Since GOPATH has been added to PATH (at the beginning of this doc), the CLI comm
 
 ## Adding commands:
 
+NOTE: `go install github.com/mwiater/golang-library` must be run when updating cmd files...
+
 cobra add bubblesort
+
+### Creates: `cmd/bubblesort.go` scaffold...
 
 Rebuild: `go install github.com/mwiater/golang-library`
 
@@ -171,9 +190,19 @@ Run: `golang-library bubblesort`
 
 cobra add pi
 
+### Creates: `cmd/pi.go` scaffold...
+
 go install github.com/mwiater/golang-library
 
 golang-library pi
+
+cobra add json
+
+### Creates: `cmd/json.go` scaffold...
+
+go install github.com/mwiater/golang-library
+
+golang-library json
 
 # List Commands
 

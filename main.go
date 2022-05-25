@@ -15,8 +15,14 @@ limitations under the License.
 */
 package main
 
-import "github.com/mwiater/golang-library/cmd"
+import (
+	"fmt"
+
+	"github.com/mwiater/golang-library/cmd"
+) 
 
 func main() {
+	fmt.Print("\033[H\033[2J")
+
 	cmd.Execute()
 }
